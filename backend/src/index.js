@@ -21,6 +21,33 @@ app.get("/signup", (req, res) => {
     res.render("signup");
 });
 
+
+
+app.get('/', (req, res) => {
+    res.render('index'); // Assuming you have an index.ejs file
+  });
+
+
+  // Define the route for /index
+app.get('/index', (req, res) => {
+    res.render('index'); // Render index.ejs for /index path
+  });
+  
+
+app.get('/about', (req, res) => {
+    res.render('about'); // Render about.ejs
+  });
+
+app.get("/contact", (req, res) => {
+    res.render("contact"); // Render contact.ejs
+  });
+
+app.get("/single-product", (req, res) => {
+    res.render("single-product"); // Render contact.ejs
+});
+
+
+
 // Register user
 app.post("/signup", async (req, res) => {
     const data = {
@@ -50,6 +77,10 @@ app.post("/signup", async (req, res) => {
     }
 });
 
+
+
+
+
 // Login user
 app.post("/login", async (req, res) => {
     try {
@@ -61,7 +92,7 @@ app.post("/login", async (req, res) => {
         // Compare the hash password from the database with the plain text
         const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
         if (isPasswordMatch) {
-            res.render("home");
+            res.render("index");
         } else {
             res.status(400).send("Wrong password");
         }
@@ -71,6 +102,8 @@ app.post("/login", async (req, res) => {
         res.status(500).send("Wrong details");
     }
 });
+
+
 
 const port = 5000;
 app.listen(port, () => {
